@@ -7,7 +7,7 @@ const app = express();
 
 app.use(express.json());
 
-app.use('/users', userRoutes);
+app.use('/api/users', userRoutes);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
@@ -17,7 +17,7 @@ async function startServer() {
     await sequelize.authenticate();
     console.log('Conexión a PostgreSQL establecida correctamente.');
     
-    await sequelize.sync({ force: false }); 
+    await sequelize.sync({ force: true }); 
     console.log('Modelos sincronizados con la base de datos.');
     
     const PORT = process.env.PORT || 3000;
