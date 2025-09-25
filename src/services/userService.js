@@ -1,5 +1,8 @@
 const UserRepository = require('../repositories/userRepository');
 
+/**
+ * Servicio de usuarios que contiene la lógica de negocio
+ */
 class UserService {
   constructor() {
     this.userRepository = new UserRepository();
@@ -29,6 +32,17 @@ class UserService {
     }
   }
 
+    /**
+   * Crea un nuevo usuario con validación de email único
+   * @async
+   * @param {Object} userData - Datos del usuario a crear
+   * @param {string} userData.name - Nombre del usuario
+   * @param {string} userData.email - Email único del usuario
+   * @param {number} [userData.age] - Edad opcional
+   * @returns {Promise<User>} Usuario creado
+   * @throws {Error} Si el email ya existe o datos inválidos
+   */
+  
   async createUser(userData) {
     try {
       if (!userData.name || !userData.email) {

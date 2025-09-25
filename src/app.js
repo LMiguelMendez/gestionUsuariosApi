@@ -1,12 +1,15 @@
 const express = require('express');
 const sequelize = require('./config/database');
-require('./models/userModel');
-
-const app = express();
+const { swaggerUi, specs } = require('./config/swagger');
 const userRoutes = require('./routes/userRoutes');
 
+const app = express();
+
 app.use(express.json());
+
 app.use('/users', userRoutes);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 async function startServer() {
   try {
